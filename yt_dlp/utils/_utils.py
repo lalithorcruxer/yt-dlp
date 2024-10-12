@@ -4,6 +4,7 @@ import calendar
 import codecs
 import collections
 import collections.abc
+import os
 import contextlib
 import datetime as dt
 import email.header

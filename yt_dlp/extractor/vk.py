@@ -1,6 +1,7 @@
 import collections
 import hashlib
 import re
+from datetime import datetime
 
 from .common import InfoExtractor
 from .dailymotion import DailymotionIE
