@@ -23,7 +23,6 @@ import math
 import mimetypes
 import netrc
 import operator
-import os
 import platform
 import random
 import re
