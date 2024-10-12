@@ -4,6 +4,7 @@ import calendar
 import codecs
 import collections
 import collections.abc
+import os
 import contextlib
 import datetime as dt
 import email.header
@@ -22,7 +23,6 @@ import math
 import mimetypes
 import netrc
 import operator
-import os
 import platform
 import random
 import re
