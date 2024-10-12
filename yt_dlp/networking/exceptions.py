@@ -47,6 +47,11 @@ class NoSupportingHandlers(RequestError):
         if reason_str:
             err_str += f': {reason_str}'
 
+        # Specific guidance for Hotstar API issues
+        if any("hotstar" in err.msg.lower() for err in unsupported_errors):
+            err_str += ' - Please ensure the Hotstar extractor is up to date and compatible with the latest Hotstar API changes.'
+            err_str += f': {reason_str}'
+
         super().__init__(msg=err_str)
 
 
@@ -63,6 +68,10 @@ class HTTPError(RequestError):
         msg = f'HTTP Error {response.status}: {response.reason}'
         if redirect_loop:
             msg += ' (redirect loop detected)'
+        
+        # Enhanced error message for specific status codes
+        if response.status == 503:
+            msg += ' - Service Unavailable. The server is currently unable to handle the request due to temporary overloading or maintenance.'
 
         super().__init__(msg=msg)
 

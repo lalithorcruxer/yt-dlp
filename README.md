@@ -1995,11 +1995,13 @@ with yt_dlp.YoutubeDL() as ydl:
 
 print('Some videos failed to download' if error_code
       else 'All videos successfully downloaded')
-```
+
+### Hotstar API Updates
+
+Due to recent changes in Hotstar's API, yt-dlp now uses the `https://www.hotstar.com/api/internal/bff/v2/start` endpoint. Users may need to update their cookies or authentication methods accordingly.
 
 #### Extract audio
 
-```python
 import yt_dlp
 
 URLS = ['https://www.youtube.com/watch?v=BaW_jenozKc']

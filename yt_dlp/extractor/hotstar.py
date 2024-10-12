@@ -246,8 +246,7 @@ class HotStarIE(HotStarBaseIE):
         formats, subs = [], {}
         headers = {'Referer': f'{self._BASE_URL}/in'}
 
-        # change to v2 in the future
-        playback_sets = self._call_api_v2('play/v1/playback', video_id, st=st, cookies=cookies)['playBackSets']
+        playback_sets = self._call_api_v2('play/v2/playback', video_id, st=st, cookies=cookies)['playBackSets']
         for playback_set in playback_sets:
             if not isinstance(playback_set, dict):
                 continue
@@ -279,6 +278,14 @@ class HotStarIE(HotStarBaseIE):
                         'width': int_or_none(playback_set.get('width')),
                         'height': int_or_none(playback_set.get('height')),
                     }]
+
+            def _retrieve_new_token(self, session, video_id):
+                token_url = f"{self.API_BASE_URL}/tokens/{video_id}"
+                response = session.get(token_url, headers=self.headers)
+                if response.status_code != 200:
+                    raise ExtractorError(f"Failed to retrieve token: HTTP {response.status_code}")
+                return response.json().get('token')
+
             except ExtractorError as e:
                 if isinstance(e.cause, HTTPError) and e.cause.status == 403:
                     geo_restricted = True

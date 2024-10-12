@@ -4148,6 +4148,11 @@ class YoutubeDL:
             for rh in self._request_director.handlers.values()
             if isinstance(rh, ImpersonateRequestHandler))
 
+    def _log_error_details(self, error):
+        """Log detailed error information for troubleshooting."""
+        self.to_screen(f'[error] Detailed Error: {str(error)}')
+        self.write_debug(f'Detailed Error Traceback: {traceback.format_exc()}')
+
     def urlopen(self, req):
         """ Start an HTTP download """
         if isinstance(req, str):
